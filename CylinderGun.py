@@ -1,3 +1,6 @@
+##NOTE:
+##YOU MUST COPY EVERYTHING BELOW THIS INTO A PYTHON FILE BEFORE PLACING THE GUN CODE FOR TESTING
+
 class CylinderGun:
     def __init__(self, hammer, cylinder, capacity, rounds, bullet, SFX, term, triggerdown, firemode):
         self.hammer = hammer #status of the hammer, integer (0 = decocked, 0< = cocked)
