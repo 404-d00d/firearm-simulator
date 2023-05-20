@@ -1,20 +1,18 @@
+# simulates single barrel or multiple barrel firearms
+
 class Gun_BreakOpen:
-    def __init__(self, barrel, hammer, firemode, barrellock, bullet, sfx):
+    def __init__(self, barrel, hammer, firemode, barrellock):
         self.barrel = barrel
         self.hammer = hammer
         self.firemode = firemode
         self.barrellock = barrellock
-        self.bullet = bullet
-        self.sfx = sfx
 
-    def changeHammer(self, Int, cock):
+    def changeHammer(self, Int, cock): #cock: 0 = down, 1 = half cock, 2 = cock
         self.hammer[Int] = cock
 
-    def changeFiremode(self, mode):
+    def changeFiremode(self, mode): #dependent on gun.
         self.firemode = mode
 
-    def altLockBarrel(self):
-        if self.barrellock:
-            self.barrellock = False
-        else:
-            self.barrellock = True
+    def changeBarrelLock(self, x): #barrel: 0=closed, 1=partially open, 2=open
+        self.barrellock = x
+
