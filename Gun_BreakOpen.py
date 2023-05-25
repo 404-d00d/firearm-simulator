@@ -2,12 +2,16 @@
 
 class Gun_BreakOpen:
     #barrel, hammer, compatible ammo are arrays, firemode and barrellock are integers
-    def __init__(self, barrel, hammer, firemode, barrellock, ammo):
+    #exject variable: 0=eject always, 1=eject empties extract live, 2=extract always
+    #independent hammer: 0=cock hammer when open/close, 1=hammer independent from barrel locking
+    def __init__(self, barrel, hammer, firemode, barrellock, ammo, exject, indepham):
         self.barrel = barrel
         self.hammer = hammer
         self.firemode = firemode
         self.barrellock = barrellock
         self.ammo = ammo
+        self.exject = exject
+        self.indepham = indepham
 
     def changeHammer(self, Int, cock): #cock: 0 = down, 1 = half cock, 2 = cock
         self.hammer[Int] = cock
@@ -15,15 +19,35 @@ class Gun_BreakOpen:
     def changeFiremode(self, mode): #dependent on gun.
         self.firemode = mode
 
-    def changeBarrelLock(self, x): #barrel: 0=closed, 1=partially open, 2<=open
+    def getHammer(self, x): #return hammer state
+        return self.hammer[x]
+
+    def changeBarrelLock(self, x): #barrel: 0=closed, 1 & 2=partially open, 3=open
         self.barrellock = x
+        if self.indepham == 1 and self.barrellock >= 2:
+            for c in range(len(self.hammer)):
+                self.changeHammer(c, 2)
+        if self.barrellock == 3:
+            if self.exject == 0:
+                for a in range(len(self.barrel)):
+                    for b in range(len(self.ammo)):
+                        if self.barrel[a] == self.ammo[b][0]:
+                            #print("remove round from chamber")
+                            self.ammo[b][1] += 1
+                    self.changeBarrel(a, "")
+            elif self.exject == 1:
+                for a in range(len(self.barrel)):
+                    for b in range(len(self.ammo)):
+                        if self.barrel[a] == "Spent "+self.ammo[b][0]:
+                            self.changeBarrel(a, "")
+                            #print("eject spent only")
 
     def changeBarrel(self, x, aemo):
         self.barrel[x] = aemo
         #print(self.barrel[x])
 
     def addRound(self, x, round):
-        if self.barrellock == 2:
+        if self.barrellock == 3:
             if self.barrel[x] == "":
                 for b in range(len(self.ammo)):
                     if self.ammo[b][0] == round:
@@ -31,7 +55,7 @@ class Gun_BreakOpen:
                         self.ammo[b][1] -= 1
 
     def removeRound(self, x):
-        if self.barrellock == 2:
+        if self.barrellock == 3:
             for b in range(len(self.ammo)):
                 if self.barrel[x] == self.ammo[b][0]:
                     #print("remove round from chamber")
@@ -59,5 +83,4 @@ class Gun_BreakOpen:
         else:
             print("PLAP")
             # pulling trigger, just slapping metal
-
 
