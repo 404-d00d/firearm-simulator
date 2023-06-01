@@ -4,7 +4,7 @@
 
 class Gun_BreakOpen:
     #barrel, hammer, compatible ammo are arrays, firemode and barrellock are integers
-    #exject variable: 0=eject always, 1=eject empties extract live, 2=extract always
+    #exject variable: 0=eject always, 1=eject empties/extract live, 2=extract always
     #independent hammer: 0=cock hammer when open/close, 1=hammer independent from barrel locking
     #holdhammer and holdtrigger used for manually lowering hammer, fan fire, slam fire, fullauto functions
     def __init__(self, barrel, hammer, firemode, barrellock, ammo, exject, indepham, holdhammer, holdtrigger):
@@ -37,8 +37,10 @@ class Gun_BreakOpen:
     def toggleTrigger(self):
         if self.holdtrigger:
             self.holdtrigger = False
+            print("You let go of the trigger")
         else:
             self.holdtrigger = True
+            print("You hold down the trigger")
 
     def showHToggle(self):
         return self.holdhammer
@@ -57,16 +59,12 @@ class Gun_BreakOpen:
         if self.barrellock == 3:
             if self.exject == 0:
                 for a in range(len(self.barrel)):
-                    for b in range(len(self.ammo)):
-                        if self.barrel[a] == self.ammo[b][0]:
-                            #print("remove round from chamber")
-                            self.ammo[b][1] += 1
-                    self.changeBarrel(a, "")
+                    self.removeRound(0)
             elif self.exject == 1:
                 for a in range(len(self.barrel)):
                     for b in range(len(self.ammo)):
                         if self.barrel[a] == "Spent "+self.ammo[b][0]:
-                            self.changeBarrel(a, "")
+                            self.removeRound(0)
                             #print("eject spent only")
 
     def changeBarrel(self, x, aemo):
@@ -99,6 +97,11 @@ class Gun_BreakOpen:
                     self.ammo[b][1] += 1
             self.changeBarrel(x, "")
 
+    def showBarrel(self):
+        for s in range(len(self.barrel)):
+            print("["+self.barrel[s]+"]", end=" ")
+        print()
+
     def fireBarrel(self, x):
         if self.barrellock == 0 and self.hammer[x] == 2:
             #print("hammer cocked, can fire")
@@ -106,6 +109,7 @@ class Gun_BreakOpen:
             for a in range(len(self.ammo)):
                 if self.barrel[x] == self.ammo[a][0]:
                     #print("bullet fired")
+                    print("You pull the trigger.")
                     print(self.ammo[a][2])
                     count += 1
                     self.changeBarrel(x, "Spent "+self.ammo[a][0])
