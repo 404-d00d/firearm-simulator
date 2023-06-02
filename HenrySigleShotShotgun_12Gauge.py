@@ -1,6 +1,6 @@
 # Henry HO15B-12 Single Shot Shotgun 12 Gauge
 
-from main import Gun_BreakOpen
+from Gun_BreakOpen import Gun_BreakOpen
 
 ammo = [["12 Gauge 2 3/4 inch Buckshot", 10, "KATHOOOOOOOM"]]
 
@@ -33,7 +33,7 @@ while act != "@":
     act = input("CMD: ")
     for a in range(len(act)):
         if act[a] == "t":
-            if HenrySSShotgun.getBarrelLock() < 1:
+            if HenrySSShotgun.getBarrelLock() < 1 and HenrySSShotgun.getHammer(0) == 0:
                 HenrySSShotgun.changeBarrelLock(1)
                 print("You move the lever, and open the action.")
                 print("The gun is partially open.")
@@ -42,19 +42,18 @@ while act != "@":
             if HenrySSShotgun.showTToggle():
                 HenrySSShotgun.fireBarrel(0)
         elif act[a] == "T":
-            if HenrySSShotgun.getBarrelLock() < 3:
+            if HenrySSShotgun.getBarrelLock() < 3 and HenrySSShotgun.getHammer(0) == 0:
                 HenrySSShotgun.changeBarrelLock(3)
                 print("You move the lever, and open the action.")
                 print("The gun is fully open.")
         elif act[a] == "G":
-            if HenrySSShotgun.getBarrelLock() == 0:
-                HenrySSShotgun.changeHammer(0, 2)
-                print("You pull back the hammer, letting go once it is fully cocked.")
+            HenrySSShotgun.changeHammer(0, 2)
+            print("You pull back the hammer, letting go once it is fully cocked.")
             if HenrySSShotgun.showTToggle():
                 HenrySSShotgun.fireBarrel(0)
         elif act[a] == "g":
             HenrySSShotgun.toggleHammer()
-            if HenrySSShotgun.getBarrelLock() == 0 and HenrySSShotgun.showHToggle():
+            if HenrySSShotgun.showHToggle():
                 HenrySSShotgun.changeHammer(0, 2)
             if HenrySSShotgun.showTToggle() and not HenrySSShotgun.showHToggle():
                 HenrySSShotgun.changeHammer(0, 0)
@@ -63,8 +62,9 @@ while act != "@":
         elif act[a] == "|":
             HenrySSShotgun.toggleTrigger()
         elif act[a] == "b":
-            HenrySSShotgun.changeBarrelLock(0)
-            print("You close up the barrel of the gun.")
+            if HenrySSShotgun.getHammer(0) == 0:
+                HenrySSShotgun.changeBarrelLock(0)
+                print("You close up the barrel of the gun.")
         elif act[a] == "y":
             HenrySSShotgun.addRound(0)
             print("You put a new cartridge into the chamber.")
@@ -80,3 +80,4 @@ while act != "@":
             HenrySSShotgun.nextRound()
         else:
             print("NOT A VALID COMMAND")
+            
