@@ -2,7 +2,7 @@
 
 from Gun_BreakOpen import Gun_BreakOpen
 
-ammo = [["12 Gauge 2 3/4 inch Buckshot", 10, "KATHOOOOOOOM"]]
+ammo = [["Winchester Super-X|12 Gauge|Buckshot", 10, "KATHOOOOOOOM", 5, 53.8, 1325, 69.85, 9]]
 
 HenrySSShotgun = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 1, False, False)
 
@@ -13,7 +13,8 @@ while act != "@":
           "who are best known for making lever action repeating rifles. This is a shotgun with a brass frame, \n"
           "and is chambered in 3 1/2 inch shells. Operation is very simple: \n"
           "Push the lever left or right to open up the gun, then shove a shell into the barrel. \n"
-          "Cock the hammer and when you're ready to fire, pull the trigger.")
+          "Cock the hammer and when you're ready to fire, pull the trigger.\n"
+          "A specialized hammer system prevents the barrel from opening or closing if the hammer is cocked.")
     print("-" * 50)
     print("Henry HO15 Single Shot Shotgun | 12 Gauge 3 1/2 inch")
     print("| = hold trigger/release trigger")
@@ -69,7 +70,7 @@ while act != "@":
             HenrySSShotgun.addRound(0)
             print("You put a new cartridge into the chamber.")
         elif act[a] == "h":
-            HenrySSShotgun.removeRound(0)
+            HenrySSShotgun.removeRound(0, 1)
             print("You remove a cartridge from the chamber")
         elif act[a] == "/":
             HenrySSShotgun.fireBarrel(0)
@@ -80,4 +81,3 @@ while act != "@":
             HenrySSShotgun.nextRound()
         else:
             print("NOT A VALID COMMAND")
-            
