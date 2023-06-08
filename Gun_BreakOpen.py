@@ -1,7 +1,6 @@
 # simulates single barrel or multiple barrel firearms
 # classes that inherit it will implement conditions based on how firearm actually operates
 # programs inheriting class just add flavor text to the operation of the firearm
-import random
 
 
 class Gun_BreakOpen:
@@ -9,7 +8,8 @@ class Gun_BreakOpen:
     #exject variable: 0=eject always, 1=eject empties/extract live, 2=extract always
     #independent hammer: 0=cock hammer when open/close, 1=hammer independent from barrel locking
     #holdhammer and holdtrigger used for manually lowering hammer, fan fire, slam fire, fullauto functions
-    def __init__(self, barrel, hammer, firemode, barrellock, ammo, exject, indepham, holdhammer, holdtrigger):
+    #opentrigger: determines whether user can pull trigger if action is open or not, 0 = yes, 1 = no
+    def __init__(self, barrel, hammer, firemode, barrellock, ammo, exject, indepham, holdhammer, holdtrigger, opentrigger):
         self.barrel = barrel
         self.hammer = hammer
         self.firemode = firemode
@@ -18,6 +18,7 @@ class Gun_BreakOpen:
         self.round = 0
         self.exject = exject
         self.indepham = indepham
+        self.opentrigger = opentrigger
         self.holdhammer = holdhammer
         self.holdtrigger = holdtrigger
 
@@ -121,19 +122,25 @@ class Gun_BreakOpen:
         return self.hammer
 
     def fireBarrel(self, x):
-        if self.barrellock == 0 and self.hammer[x] == 2:
-            #print("hammer cocked, can fire")
-            count = 0
-            for a in range(len(self.ammo)):
-                if self.barrel[x] == self.ammo[a][0]:
-                    #print("bullet fired")
-                    print("You pull the trigger.")
-                    print(self.ammo[a][2])
-                    count += 1
-                    self.changeBarrel(x, "Spent "+self.ammo[a][0])
+        if self.hammer[x] == 2:
+            if self.opentrigger == 0 and self.getBarrelLock() == 0:
+                #print("hammer cocked, can fire")
+                count = 0
+                for a in range(len(self.ammo)):
+                    if self.barrel[x] == self.ammo[a][0]:
+                        #print("bullet fired")
+                        print("You pull the trigger.")
+                        print(self.ammo[a][2])
+                        count += 1
+                        self.changeBarrel(x, "Spent "+self.ammo[a][0])
+                if count == 0:
+                    print("KLIK")
                 self.changeHammer(x, 0)
-            if count == 0:
+            elif self.opentrigger == 1:
                 print("KLIK")
+                self.changeHammer(x, 0)
+            else:
+                print("PLAP")
         else:
             print("PLAP")
             #pulling trigger, just slapping metal
