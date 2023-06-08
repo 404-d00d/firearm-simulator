@@ -122,6 +122,7 @@ class Gun_BreakOpen:
         return self.hammer
 
     def fireBarrel(self, x):
+        print("You pull the trigger.")
         if self.hammer[x] == 2:
             if self.opentrigger == 0 and self.getBarrelLock() == 0:
                 #print("hammer cocked, can fire")

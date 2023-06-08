@@ -5,7 +5,8 @@ guns = ["Savage Mk 1 FVT 22LR", "Henry Single Shot Shotgun Brass 12 Gauge"]
 
 act = ""
 while act != "exit":
-    print("Choose a gun to use... ")
+    print("-"*50)
+    print("Choose a gun to use...")
     for x in range(len(guns)):
         print(str(x+1)+" - "+guns[x])
     act = input("INPUT: ")

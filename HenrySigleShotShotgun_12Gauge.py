@@ -69,13 +69,11 @@ def main():
                     print("You close up the barrel of the gun.")
             elif act[a] == "y":
                 HenrySSShotgun.addRound(0)
-                print("You put a new cartridge into the chamber.")
             elif act[a] == "h":
                 HenrySSShotgun.removeRound(0, 1)
-                print("You remove a cartridge from the chamber")
             elif act[a] == "/":
-                HenrySSShotgun.fireBarrel(0)
-                print("You pull the trigger.")
+                if not HenrySSShotgun.showHToggle():
+                    HenrySSShotgun.fireBarrel(0)
             elif act[a] == "{":
                 HenrySSShotgun.prevRound()
             elif act[a] == "}":
