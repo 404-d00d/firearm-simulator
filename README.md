@@ -1,2 +1,5 @@
 # gun-simulator
-Simulates firearms. Their workings, operations, ammo types, jams, and other systems
+A Python project that simulates firearms. Currently it simulates operations and ammo types. Jamming, malfunctions, and other systems will be added later.
+
+# HOW TO USE
+Download the entire zip file, and extract it into a solid domain. Once extracted, run the file called Main.
