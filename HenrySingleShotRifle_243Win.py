@@ -1,24 +1,24 @@
-# Henry HO15B-12 Single Shot Shotgun 12 Gauge
+# Henry HO15-243 Single Shot Rifle 243 Winchester
 
 from Gun_BreakOpen import Gun_BreakOpen
 
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
-ammo = [["Winchester Super-X|12 Gauge|Buckshot", 10, "KATHOOOOOOOM", 53.8, 1325, 69.85, 9]]
+ammo = [["Prvi Partizan|.243 Winchester|Soft Point", 20, "KATHRAAAOOOOOOOOOOM", 90, 3100, 68.83, 1]]
 
-HenrySSShotgun = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 1, False, False, 0)
+HenrySSShotgun = Gun_BreakOpen([""], [0], 0, 0, ammo, 2, 1, False, False, 0)
 
 def main():
     act = ""
     while act != "@":
         print("-" * 50)
         print("The Henry HO15 single shot series of firearms have been a successful product line from Henry Repeating Arms, \n"
-              "who are best known for making lever action repeating rifles. This is a shotgun with a brass frame, \n"
-              "and straight stock, and is chambered in 3 1/2 inch shells. Operation is very simple: \n"
-              "Push the lever left or right to open up the gun, then shove a shell into the barrel. \n"
+              "who are best known for making lever action repeating rifles. This is a rifle with a semi-pistol grip stock, \n"
+              "and is chambered in .243 Winchester. Operation is very simple: \n"
+              "Push the lever left or right to open up the gun, then shove a cartridge into the barrel. \n"
               "Cock the hammer and when you're ready to fire, pull the trigger.\n"
               "A specialized hammer system prevents the barrel from opening or closing if the hammer is cocked.")
         print("-" * 50)
-        print("Henry HO15 Single Shot Shotgun | 12 Gauge 3 1/2 inch")
+        print("Henry HO15 Single Shot Rifle | .243 Winchester")
         print("| = hold trigger/release trigger")
         print("/ = yank trigger")
         print("g/G = pull hammer/release hammer, yank back hammer")

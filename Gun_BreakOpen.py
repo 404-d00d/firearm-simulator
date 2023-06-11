@@ -46,10 +46,10 @@ class Gun_BreakOpen:
     def toggleTrigger(self):
         if self.holdtrigger:
             self.holdtrigger = False
-            print("You let go of the trigger")
+            print("You let go of the trigger.")
         else:
             self.holdtrigger = True
-            print("You hold down the trigger")
+            print("You squeeze the trigger.")
 
     def showHToggle(self):
         return self.holdhammer
@@ -122,7 +122,8 @@ class Gun_BreakOpen:
         return self.hammer
 
     def fireBarrel(self, x):
-        print("You pull the trigger.")
+        if not self.showTToggle():
+            print("You pull the trigger.")
         if self.hammer[x] == 2:
             if self.opentrigger == 0 and self.getBarrelLock() == 0:
                 #print("hammer cocked, can fire")
@@ -130,7 +131,6 @@ class Gun_BreakOpen:
                 for a in range(len(self.ammo)):
                     if self.barrel[x] == self.ammo[a][0]:
                         #print("bullet fired")
-                        print("You pull the trigger.")
                         print(self.ammo[a][2])
                         count += 1
                         self.changeBarrel(x, "Spent "+self.ammo[a][0])
@@ -141,7 +141,8 @@ class Gun_BreakOpen:
                 print("KLIK")
                 self.changeHammer(x, 0)
             else:
-                print("PLAP")
+                if not self.showTToggle():
+                    print("PLAP")
         else:
             print("PLAP")
             #pulling trigger, just slapping metal
