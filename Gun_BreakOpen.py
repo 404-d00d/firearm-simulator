@@ -62,14 +62,16 @@ class Gun_BreakOpen:
 
     def changeBarrelLock(self, x): #barrel: 0=closed, 1 & 2=partially open, 3=open
         self.barrellock = x
-        if self.indepham == 0 and self.barrellock >= 2:
+        if self.indepham == 0 and self.barrellock >= 1:
             for c in range(len(self.hammer)):
                 self.changeHammer(c, 2)
         if self.barrellock == 3:
             if self.exject == 0:
                 for a in range(len(self.barrel)):
-                    self.removeRound(0, 0)
-                    print("A live cartridge flies out of the chamber")
+                    for b in range(len(self.ammo)):
+                        if self.barrel[a] == self.ammo[b][0]:
+                            self.removeRound(0, 0)
+                            print("A live cartridge flies out of the chamber")
             elif self.exject == 1:
                 for a in range(len(self.barrel)):
                     for b in range(len(self.ammo)):
@@ -146,3 +148,5 @@ class Gun_BreakOpen:
         else:
             print("PLAP")
             #pulling trigger, just slapping metal
+        if not self.showTToggle():
+            print("After you pulled the trigger, you let go of it.")

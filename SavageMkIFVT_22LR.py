@@ -5,7 +5,7 @@ from Gun_BreakOpen import Gun_BreakOpen
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
 ammo = [["CCI Mini Mag|.22 LR|Round Nose", 100, "KRAAAAAAAK", 40, 1235, 25.4, 1]]
 
-SavageMK1 = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 1, False, False, 0)
+SavageMK1 = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 0, False, False, 0)
 
 def main():
     act = ""

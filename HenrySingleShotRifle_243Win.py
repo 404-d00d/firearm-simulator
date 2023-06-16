@@ -50,20 +50,23 @@ def main():
                     print("You move the lever, and open the action.")
                     print("The gun is fully open.")
             elif act[a] == "G":
-                HenrySSShotgun.changeHammer(0, 2)
-                print("You pull back the hammer, letting go once it is fully cocked.")
-                if HenrySSShotgun.showTToggle():
-                    HenrySSShotgun.fireBarrel(0)
+                if HenrySSShotgun.getHammer(0) == 0:
+                    HenrySSShotgun.changeHammer(0, 2)
+                    print("You pull back the hammer, letting go once it is fully cocked.")
+                    if HenrySSShotgun.showTToggle():
+                        print("The hammer immediately slams into the chamber.")
+                        HenrySSShotgun.fireBarrel(0)
             elif act[a] == "g":
                 HenrySSShotgun.toggleHammer()
                 if HenrySSShotgun.showHToggle():
                     HenrySSShotgun.changeHammer(0, 2)
+                    print("You pull back the hammer, and you keep your thumb on it.")
+                else:
+                    print("You remove your thumb from the hammer.")
                 if HenrySSShotgun.showTToggle() and not HenrySSShotgun.showHToggle():
                     HenrySSShotgun.changeHammer(0, 0)
                     print("You ease the hammer into its resting position.")
                     print("The gun is now not cocked.")
-            elif act[a] == "|":
-                HenrySSShotgun.toggleTrigger()
             elif act[a] == "b":
                 if HenrySSShotgun.getHammer(0) == 0:
                     HenrySSShotgun.changeBarrelLock(0)
@@ -79,5 +82,7 @@ def main():
                 HenrySSShotgun.prevRound()
             elif act[a] == "}":
                 HenrySSShotgun.nextRound()
+            elif act[a] == "@":
+                print("Exiting Program...")
             else:
                 print("NOT A VALID COMMAND")
