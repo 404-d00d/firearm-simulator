@@ -5,7 +5,7 @@ from Gun_BreakOpen import Gun_BreakOpen
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
 ammo = [["Winchester USA Ready|6.5 Creedmoor|Open Tip", 20, "KRAAAAAAATHOOOOOOOOOOOM", 140, 2700, 71.8, 1]]
 
-RugerNo1 = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 0, False, False, 0)
+RugerNo1 = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 0, False, False, 0, 3)
 
 
 def main():
@@ -15,7 +15,8 @@ def main():
         print("The Ruger No 1 is a single shot rifle chambered in large rifle calibers. It is\n"
               "one of Ruger's most successful products, having been made since the 1960s.\n"
               "It is a falling block rifle, and to load it you must push down the lever to open\n"
-              "up the chamber, where you can then load a cartridge into the breech.")
+              "up the chamber, where you can then load a cartridge into the breech. Close up the lever\n"
+              "and you are ready to fire. A tang safety blocks the trigger if activated.")
         print("-" * 50)
         print("Ruger No 1 Rifle | 6.5 Creedmoor")
         print("| = hold trigger/release trigger")
@@ -54,12 +55,18 @@ def main():
                     print("You depress the inside button on the lever, and push it down fully, opening the action.")
                     print("The gun is fully open.")
                     RugerNo1.changeBarrelLock(3)
+                else:
+                    print("The gun is already fully open.")
             elif act[a] == "b":
                 if RugerNo1.getBarrelLock() != 0:
                     RugerNo1.changeBarrelLock(0)
                     print("You close up the lever, and thus close the action of the gun.")
+                    if RugerNo1.showTToggle():
+                        RugerNo1.changeHammer(0, 0)
+                else:
+                    print("The action is already closed.")
             elif act[a] == "/":
-                if RugerNo1.getFiremode() == 0:
+                if RugerNo1.getFiremode() == 0 and not RugerNo1.showTToggle():
                     RugerNo1.fireBarrel(0)
             elif act[a] == "y":
                 RugerNo1.addRound(0)

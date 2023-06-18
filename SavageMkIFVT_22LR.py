@@ -5,7 +5,7 @@ from Gun_BreakOpen import Gun_BreakOpen
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
 ammo = [["CCI Mini Mag|.22 LR|Round Nose", 100, "KRAAAAAAAK", 40, 1235, 25.4, 1]]
 
-SavageMK1 = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 0, False, False, 0)
+SavageMK1 = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 0, False, False, 0, 1)
 
 def main():
     act = ""
@@ -36,7 +36,6 @@ def main():
             if act[a] == "g":
                 if SavageMK1.getBarrelLock() == 0:
                     SavageMK1.changeBarrelLock(1)
-                    SavageMK1.changeHammer(0, 2)
                     print("You lift up the bolt handle until it is upright.\n"
                           "The gun is now cocked.")
                 elif SavageMK1.getBarrelLock() == 1:
@@ -55,20 +54,32 @@ def main():
                 if SavageMK1.getBarrelLock() >= 2:
                     SavageMK1.changeBarrelLock(1)
                     print("You push the bolt until the chamber is closed")
+                else:
+                    print("The bolt is already closed.")
             elif act[a] == "t":
-                if SavageMK1.getBarrelLock() == 1:
-                    SavageMK1.changeBarrelLock(2)
-                    print("You pull back the bolt partially.")
+                if not SavageMK1.showTToggle():
+                    if SavageMK1.getBarrelLock() == 1:
+                        SavageMK1.changeBarrelLock(2)
+                        print("You pull back the bolt partially.")
+                else:
+                    print("You pull back the bolt, only to realize that you'll just remove the bolt from the gun.")
+                    print("Bad idea.")
             elif act[a] == "T":
-                if SavageMK1.getBarrelLock() >= 1:
-                    SavageMK1.changeBarrelLock(3)
-                    print("You pull back the bolt fully.")
+                if not SavageMK1.showTToggle():
+                    if SavageMK1.getBarrelLock() >= 1 and SavageMK1.getBarrelLock() != 3:
+                        SavageMK1.changeBarrelLock(3)
+                        print("You pull back the bolt fully.")
+                    else:
+                        print("The gun is already fully open.")
+                else:
+                    print("You pull back the bolt, only to realize that you'll just remove the bolt from the gun.")
+                    print("Bad idea.")
             elif act[a] == "y":
                 SavageMK1.addRound(0)
             elif act[a] == "h":
                 SavageMK1.removeRound(0, 1)
             elif act[a] == "/":
-                if SavageMK1.getFiremode() == 0:
+                if SavageMK1.getFiremode() == 0 and not SavageMK1.showTToggle():
                     SavageMK1.fireBarrel(0)
             elif act[a] == "|":
                 SavageMK1.toggleTrigger()

@@ -5,7 +5,7 @@ from Gun_BreakOpen import Gun_BreakOpen
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
 ammo = [["Winchester Super-X|12 Gauge|Buckshot", 10, "KATHOOOOOOOM", 53.8, 1325, 69.85, 9]]
 
-HenrySSShotgun = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 1, False, False, 0)
+HenrySSShotgun = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
 
 def main():
     act = ""
@@ -49,6 +49,8 @@ def main():
                     HenrySSShotgun.changeBarrelLock(3)
                     print("You move the lever, and open the action.")
                     print("The gun is fully open.")
+                else:
+                    print("The gun is already fully open.")
             elif act[a] == "G":
                 if HenrySSShotgun.getHammer(0) == 0:
                     HenrySSShotgun.changeHammer(0, 2)
@@ -71,12 +73,14 @@ def main():
                 if HenrySSShotgun.getHammer(0) == 0:
                     HenrySSShotgun.changeBarrelLock(0)
                     print("You close up the barrel of the gun.")
+                else:
+                    print("The action is already closed.")
             elif act[a] == "y":
                 HenrySSShotgun.addRound(0)
             elif act[a] == "h":
                 HenrySSShotgun.removeRound(0, 1)
             elif act[a] == "/":
-                if not HenrySSShotgun.showHToggle():
+                if not HenrySSShotgun.showHToggle() and not HenrySSShotgun.showTToggle():
                     HenrySSShotgun.fireBarrel(0)
             elif act[a] == "{":
                 HenrySSShotgun.prevRound()

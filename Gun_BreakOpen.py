@@ -9,7 +9,8 @@ class Gun_BreakOpen:
     #independent hammer: 0=cock hammer when open/close, 1=hammer independent from barrel locking
     #holdhammer and holdtrigger used for manually lowering hammer, fan fire, slam fire, fullauto functions
     #opentrigger: determines whether user can pull trigger if action is open or not, 0 = yes, 1 = no
-    def __init__(self, barrel, hammer, firemode, barrellock, ammo, exject, indepham, holdhammer, holdtrigger, opentrigger):
+    #cockon: determines at what stage on opening the action the gun will be cocked: 0 = cocking independed, 1-3 = stages of action
+    def __init__(self, barrel, hammer, firemode, barrellock, ammo, exject, indepham, holdhammer, holdtrigger, opentrigger, cockon):
         self.barrel = barrel
         self.hammer = hammer
         self.firemode = firemode
@@ -21,6 +22,7 @@ class Gun_BreakOpen:
         self.opentrigger = opentrigger
         self.holdhammer = holdhammer
         self.holdtrigger = holdtrigger
+        self.cockon = cockon
 
     def currentAmmo(self):
         print("Current ammo type: " + self.ammo[self.round][0] + " | " + str(self.ammo[self.round][1]) + " rounds")
@@ -62,22 +64,12 @@ class Gun_BreakOpen:
 
     def changeBarrelLock(self, x): #barrel: 0=closed, 1 & 2=partially open, 3=open
         self.barrellock = x
-        if self.indepham == 0 and self.barrellock >= 1:
+        if self.indepham == 0 and self.barrellock >= self.cockon:
             for c in range(len(self.hammer)):
                 self.changeHammer(c, 2)
         if self.barrellock == 3:
-            if self.exject == 0:
-                for a in range(len(self.barrel)):
-                    for b in range(len(self.ammo)):
-                        if self.barrel[a] == self.ammo[b][0]:
-                            self.removeRound(0, 0)
-                            print("A live cartridge flies out of the chamber")
-            elif self.exject == 1:
-                for a in range(len(self.barrel)):
-                    for b in range(len(self.ammo)):
-                        if self.barrel[a] == "Spent "+self.ammo[b][0]:
-                            self.removeRound(0, 0)
-                            print("A spent cartridge flies out of the chamber")
+            if self.exject <= 1:
+                self.removeRound(0, 0)
 
     def changeBarrel(self, x, aemo):
         self.barrel[x] = aemo
@@ -101,6 +93,8 @@ class Gun_BreakOpen:
             self.ammo[self.round][1] -= 1
             self.changeBarrel(x, self.ammo[self.round][0])
             print("You insert a live cartridge into the chamber.")
+        else:
+            print("There's already a cartridge in the chamber.")
 
     # y=0 autoremove, y=1 manually remove
     def removeRound(self, x, y):
@@ -111,8 +105,15 @@ class Gun_BreakOpen:
                     self.ammo[b][1] += 1
                     if y == 1:
                         print("You remove a live cartridge from the chamber.")
-                elif self.barrel[x] == "Spent "+self.ammo[b][0] and y == 1:
-                    print("You remove a spent cartridge from the chamber.")
+                    else:
+                        print("A live cartridge flies out of the chamber.")
+                elif self.barrel[x] == "Spent "+self.ammo[b][0] and self.exject <= 1:
+                    if y == 1:
+                        print("You remove a spent cartridge from the chamber.")
+                    else:
+                        print("A spent cartridge flies out of the chamber.")
+                else:
+                    print("There is nothing to remove.")
             self.changeBarrel(x, "")
 
     def showBarrel(self):
