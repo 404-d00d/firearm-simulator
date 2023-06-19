@@ -67,8 +67,8 @@ def main():
             elif act[a] == "T":
                 if not SavageMK1.showTToggle():
                     if SavageMK1.getBarrelLock() >= 1 and SavageMK1.getBarrelLock() != 3:
-                        SavageMK1.changeBarrelLock(3)
                         print("You pull back the bolt fully.")
+                        SavageMK1.changeBarrelLock(3)
                     else:
                         print("The gun is already fully open.")
                 else:

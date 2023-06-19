@@ -2,9 +2,11 @@ import SavageMkIFVT_22LR
 import HenrySigleShotShotgun_12Gauge
 import HenrySingleShotRifle_243Win
 import RugerNo1_65CM
+import RossiSSPolyTuffyGreen_410Bore
 
 guns = ["Henry Single Shot Shotgun Brass Frame = 12 Gauge", "Henry Single Shot Rifle = .243 Win",
-        "Ruger No 1 Rifle = 6.5 CM", "Savage Mark 1 FVT Rifle = .22 LR"]
+        "Ruger No 1 Rifle = 6.5 CM", "Savage Mark 1 FVT Rifle = .22 LR",
+        "Rossi SS Poly Tuffy Green Shotgun = .410 Bore"]
 
 act = ""
 while act != "exit":
@@ -21,6 +23,8 @@ while act != "exit":
         RugerNo1_65CM.main()
     elif act == "4":
         SavageMkIFVT_22LR.main()
+    elif act == "5":
+        RossiSSPolyTuffyGreen_410Bore.main()
     elif act == "exit":
         print("Thank you for using the program. Have a nice day.")
     else:

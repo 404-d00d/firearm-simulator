@@ -30,7 +30,7 @@ class Gun_BreakOpen:
     def changeHammer(self, Int, cock): #cock: 0 = down, 1 = half cock, 2 = cock
         self.hammer[Int] = cock
 
-    def changeFiremode(self, mode): #dependent on gun.
+    def changeFiremode(self, mode): #dependent on gun. 0 is always ready to fire,
         self.firemode = mode
 
     def getFiremode(self):
@@ -67,13 +67,12 @@ class Gun_BreakOpen:
         if self.indepham == 0 and self.barrellock >= self.cockon:
             for c in range(len(self.hammer)):
                 self.changeHammer(c, 2)
-        if self.barrellock == 3:
+        if self.barrellock == 3: #if ejection is true for all or spent cartridges, play remove round
             if self.exject <= 1:
                 self.removeRound(0, 0)
 
     def changeBarrel(self, x, aemo):
         self.barrel[x] = aemo
-        #print(self.barrel[x])
 
     def getCurrentRound(self):
         return self.round
@@ -89,24 +88,30 @@ class Gun_BreakOpen:
             self.round = 0
 
     def addRound(self, x):
-        if self.barrellock == 3 and self.barrel[x] == "" and self.ammo[self.round][1] > 0:
-            self.ammo[self.round][1] -= 1
-            self.changeBarrel(x, self.ammo[self.round][0])
-            print("You insert a live cartridge into the chamber.")
+        if self.barrellock == 3:
+            if self.barrel[x] == "":
+                if self.ammo[self.round][1] > 0:
+                    self.ammo[self.round][1] -= 1
+                    self.changeBarrel(x, self.ammo[self.round][0])
+                    print("You insert a live cartridge into the chamber.")
+                else:
+                    print("There's no more cartridges left to put into the chamber.")
+            else:
+                print("There's already a cartridge in the chamber.")
         else:
-            print("There's already a cartridge in the chamber.")
+            print("You can't put a round into a closed chamber.")
 
     # y=0 autoremove, y=1 manually remove
     def removeRound(self, x, y):
         if self.barrellock == 3:
             for b in range(len(self.ammo)):
                 if self.barrel[x] == self.ammo[b][0]:
-                    #print("remove round from chamber")
                     self.ammo[b][1] += 1
                     if y == 1:
                         print("You remove a live cartridge from the chamber.")
                     else:
                         print("A live cartridge flies out of the chamber.")
+                #selective ejection systems only kick out spent shells AFAIK
                 elif self.barrel[x] == "Spent "+self.ammo[b][0] and self.exject <= 1:
                     if y == 1:
                         print("You remove a spent cartridge from the chamber.")
@@ -115,6 +120,8 @@ class Gun_BreakOpen:
                 else:
                     print("There is nothing to remove.")
             self.changeBarrel(x, "")
+        else:
+            print("You can't remove a cartridge from a closed chamber.")
 
     def showBarrel(self):
         for s in range(len(self.barrel)):
@@ -127,13 +134,14 @@ class Gun_BreakOpen:
     def fireBarrel(self, x):
         if not self.showTToggle():
             print("You pull the trigger.")
+        #hammer must be cocked in order to fire properly
         if self.hammer[x] == 2:
             if self.opentrigger == 0 and self.getBarrelLock() == 0:
-                #print("hammer cocked, can fire")
+                #check if ammo in barrel does not match up with ammolist, if not produce clicking noise,
+                # hammer goes down,
                 count = 0
                 for a in range(len(self.ammo)):
                     if self.barrel[x] == self.ammo[a][0]:
-                        #print("bullet fired")
                         print(self.ammo[a][2])
                         count += 1
                         self.changeBarrel(x, "Spent "+self.ammo[a][0])

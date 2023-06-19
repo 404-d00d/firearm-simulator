@@ -3,7 +3,7 @@
 from Gun_BreakOpen import Gun_BreakOpen
 
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
-ammo = [["Winchester Super-X|12 Gauge|Buckshot", 10, "KATHOOOOOOOM", 53.8, 1325, 69.85, 9]]
+ammo = [["Winchester Super-X|12 Gauge|00 Buckshot", 5, "KATHOOOOOOOM", 53.8, 1325, 69.85, 9]]
 
 HenrySSShotgun = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
 
@@ -27,7 +27,7 @@ def main():
         print("y = insert round")
         print("h = remove round")
         print("{,} = next/previous ammo type")
-        print("Current ammo type: "+ammo[HenrySSShotgun.getCurrentRound()][0]+"| "+str(ammo[HenrySSShotgun.getCurrentRound()][1])+" rounds")
+        HenrySSShotgun.currentAmmo()
         print("-"*50)
         print("hold hammer: "+str(HenrySSShotgun.showHToggle()))
         print("hold trigger: "+str(HenrySSShotgun.showTToggle()))
@@ -46,9 +46,9 @@ def main():
                     HenrySSShotgun.fireBarrel(0)
             elif act[a] == "T":
                 if HenrySSShotgun.getBarrelLock() < 3 and HenrySSShotgun.getHammer(0) == 0:
-                    HenrySSShotgun.changeBarrelLock(3)
                     print("You move the lever, and open the action.")
                     print("The gun is fully open.")
+                    HenrySSShotgun.changeBarrelLock(3)
                 else:
                     print("The gun is already fully open.")
             elif act[a] == "G":
@@ -61,8 +61,11 @@ def main():
             elif act[a] == "g":
                 HenrySSShotgun.toggleHammer()
                 if HenrySSShotgun.showHToggle():
-                    HenrySSShotgun.changeHammer(0, 2)
-                    print("You pull back the hammer, and you keep your thumb on it.")
+                    if HenrySSShotgun.getHammer(0) == 0:
+                        HenrySSShotgun.changeHammer(0, 2)
+                        print("You pull back the hammer, and you keep your thumb on it.")
+                    else:
+                        print("You put your thumb on the hammer.")
                 else:
                     print("You remove your thumb from the hammer.")
                 if HenrySSShotgun.showTToggle() and not HenrySSShotgun.showHToggle():
