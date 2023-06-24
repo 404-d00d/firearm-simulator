@@ -2,9 +2,13 @@
 # classes that inherit it will implement conditions based on how firearm actually operates
 # programs inheriting class just add flavor text to the operation of the firearm
 
+import random
+
 
 class Gun_BreakOpen:
     #barrel, hammer, compatible ammo are arrays, firemode and barrellock are integers
+    #barrel is 2d array, first item is barrel contents, second item is whether barrel is blocked or not, 3rd item
+    # is how long until ammo will fire if cartridge is a hang fire malfunction, 4th item is time hang fire started
     #exject variable: 0=eject always, 1=eject empties/extract live, 2=extract always
     #independent hammer: 0=cock hammer when open/close, 1=hammer independent from barrel locking
     #holdhammer and holdtrigger used for manually lowering hammer, fan fire, slam fire, fullauto functions
@@ -23,6 +27,24 @@ class Gun_BreakOpen:
         self.holdhammer = holdhammer
         self.holdtrigger = holdtrigger
         self.cockon = cockon
+        self.currentbarrel = 0
+        self.secondsPassed = 0
+
+    def incrementSec(self, y):
+        self.secondsPassed += y
+        self.hangFire()
+
+    def hangFire(self):
+        for b in range(len(self.barrel)):
+            # if the time between pulling the trigger and now is greater than the saved hang fire time - fire
+            if self.secondsPassed - self.barrel[b][3] >= self.barrel[b][2] and self.barrel[b][2] != 0:
+                for a in range(len(self.ammo)):
+                    if self.barrel[b][0] == self.ammo[a][0]:
+                        print(self.ammo[a][2])
+                        self.changeBarrel(b, "Spent " + self.ammo[a][0])
+
+    def getTotalSeconds(self):
+        return self.secondsPassed
 
     def currentAmmo(self):
         print("Current ammo type: " + self.ammo[self.round][0] + " | " + str(self.ammo[self.round][1]) + " rounds")
@@ -71,8 +93,13 @@ class Gun_BreakOpen:
             if self.exject <= 1:
                 self.removeRound(0, 0)
 
+    def blockBarrel(self, x, trueOrNot):
+        self.barrel[x][1] = trueOrNot
+
     def changeBarrel(self, x, aemo):
-        self.barrel[x] = aemo
+        self.barrel[x][0] = aemo
+        self.barrel[x][2] = 0
+        self.barrel[x][3] = 0
 
     def getCurrentRound(self):
         return self.round
@@ -89,7 +116,7 @@ class Gun_BreakOpen:
 
     def addRound(self, x):
         if self.barrellock == 3:
-            if self.barrel[x] == "":
+            if self.barrel[x][0] == "":
                 if self.ammo[self.round][1] > 0:
                     self.ammo[self.round][1] -= 1
                     self.changeBarrel(x, self.ammo[self.round][0])
@@ -105,18 +132,23 @@ class Gun_BreakOpen:
     def removeRound(self, x, y):
         if self.barrellock == 3:
             for b in range(len(self.ammo)):
-                if self.barrel[x] == self.ammo[b][0]:
+                if self.barrel[x][0] == self.ammo[b][0]:
                     self.ammo[b][1] += 1
                     if y == 1:
                         print("You remove a live cartridge from the chamber.")
                     else:
                         print("A live cartridge flies out of the chamber.")
-                #selective ejection systems only kick out spent shells AFAIK
-                elif self.barrel[x] == "Spent "+self.ammo[b][0] and self.exject <= 1:
+                #selective ejection systems only kick out spent shells AFAIK - will amend once more info found
+                elif self.barrel[x][0] == "Spent "+self.ammo[b][0]:
                     if y == 1:
                         print("You remove a spent cartridge from the chamber.")
                     else:
                         print("A spent cartridge flies out of the chamber.")
+                elif self.barrel[x][0] == "Dud "+self.ammo[b][0]:
+                    if y == 1:
+                        print("You remove a dud cartridge from the chamber.")
+                    else:
+                        print("A dud cartridge flies out of the chamber.")
                 else:
                     print("There is nothing to remove.")
             self.changeBarrel(x, "")
@@ -125,7 +157,7 @@ class Gun_BreakOpen:
 
     def showBarrel(self):
         for s in range(len(self.barrel)):
-            print("["+self.barrel[s]+"]", end=" ")
+            print("["+self.barrel[s][0]+"]", end=" ")
         print()
 
     def getAllHammer(self):
@@ -141,10 +173,27 @@ class Gun_BreakOpen:
                 # hammer goes down,
                 count = 0
                 for a in range(len(self.ammo)):
-                    if self.barrel[x] == self.ammo[a][0]:
-                        print(self.ammo[a][2])
-                        count += 1
-                        self.changeBarrel(x, "Spent "+self.ammo[a][0])
+                    if self.barrel[x][0] == self.ammo[a][0]:
+                        malfunction = random.random()
+                        if malfunction < self.ammo[a][7]:
+                            malftype = random.randint(0, 2)
+                            # Dud rounds, powder in cartridge doesn't fire at all
+                            if malftype == 0:
+                                self.changeBarrel(x, "Dud " + self.ammo[a][0])
+                            # Hang fire, powder ignition is delayed, bullet will fire later
+                            elif malftype == 1:
+                                self.barrel[x][2] = random.uniform(0.1, 30)
+                                self.barrel[x][3] = self.secondsPassed
+                            # Squib load, charge is not enough to propel bullet, bullet is stuck in barrel
+                            else:
+                                print("POOOOFFFFFFFF")
+                                self.changeBarrel(x, "Spent " + self.ammo[a][0])
+                                self.blockBarrel(x, True)
+                                count += 1
+                        else:
+                            print(self.ammo[a][2])
+                            count += 1
+                            self.changeBarrel(x, "Spent "+self.ammo[a][0])
                 if count == 0:
                     print("KLIK")
                 self.changeHammer(x, 0)

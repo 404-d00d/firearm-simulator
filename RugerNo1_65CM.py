@@ -2,10 +2,10 @@
 
 from Gun_BreakOpen import Gun_BreakOpen
 
-#brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
-ammo = [["Winchester USA Ready|6.5 Creedmoor|Open Tip", 20, "KRAAAAAAATHOOOOOOOOOOOM", 140, 2700, 71.8, 1]]
+#brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count, malfunction chance
+ammo = [["Winchester USA Ready|6.5 Creedmoor|Open Tip", 20, "KRAAAAAAATHOOOOOOOOOOOM", 140, 2700, 71.8, 1, 0.001]]
 
-RugerNo1 = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 0, False, False, 0, 3)
+RugerNo1 = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 0, False, False, 0, 3)
 
 
 def main():
@@ -80,3 +80,4 @@ def main():
                 print("Exiting Program...")
             else:
                 print("NOT A VALID COMMAND")
+            RugerNo1.incrementSec(1)

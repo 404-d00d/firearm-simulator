@@ -2,10 +2,10 @@
 
 from Gun_BreakOpen import Gun_BreakOpen
 
-#brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
-ammo = [["Fiocchi Target|.410 Bore|#8 Birdshot", 25, "KATHRAAAAK", 1.07, 1250, 63.5, 204]]
+#brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count, malfunction chance
+ammo = [["Fiocchi Target|.410 Bore|#8 Birdshot", 25, "KATHRAAAAK", 1.07, 1250, 63.5, 204, 0.001]]
 
-RossiSSPTGreen = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
+RossiSSPTGreen = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
 
 def main():
     act = ""
@@ -133,3 +133,4 @@ def main():
                 print("Exiting Program...")
             else:
                 print("NOT A VALID COMMAND")
+            RossiSSPTGreen.incrementSec(1)

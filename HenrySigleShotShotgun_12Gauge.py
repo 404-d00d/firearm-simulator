@@ -2,10 +2,10 @@
 
 from Gun_BreakOpen import Gun_BreakOpen
 
-#brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
-ammo = [["Winchester Super-X|12 Gauge|00 Buckshot", 5, "KATHOOOOOOOM", 53.8, 1325, 69.85, 9]]
+#brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count, malfunction chance
+ammo = [["Winchester Super-X|12 Gauge|00 Buckshot", 5, "KATHOOOOOOOM", 53.8, 1325, 69.85, 9, 0.001]]
 
-HenrySSShotgun = Gun_BreakOpen([""], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
+HenrySSShotgun = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
 
 def main():
     act = ""
@@ -93,3 +93,4 @@ def main():
                 print("Exiting Program...")
             else:
                 print("NOT A VALID COMMAND")
+            HenrySSShotgun.incrementSec(1)

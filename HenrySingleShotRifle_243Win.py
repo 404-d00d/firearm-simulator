@@ -2,10 +2,10 @@
 
 from Gun_BreakOpen import Gun_BreakOpen
 
-#brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count
-ammo = [["Prvi Partizan|.243 Winchester|Soft Point", 20, "KATHRAAAOOOOOOOOOOM", 90, 3100, 68.83, 1]]
+#brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count, malfunction chance
+ammo = [["Prvi Partizan|.243 Winchester|Soft Point", 20, "KATHRAAAOOOOOOOOOOM", 90, 3100, 68.83, 1, 0.001]]
 
-HenrySSRifle = Gun_BreakOpen([""], [0], 0, 0, ammo, 2, 1, False, False, 0, 0)
+HenrySSRifle = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 2, 1, False, False, 0, 0)
 
 def main():
     act = ""
@@ -93,3 +93,4 @@ def main():
                 print("Exiting Program...")
             else:
                 print("NOT A VALID COMMAND")
+            HenrySSRifle.incrementSec(1)
