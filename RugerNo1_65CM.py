@@ -9,6 +9,8 @@ RugerNo1 = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 0, False, Fals
 
 
 def main():
+    if RugerNo1.isBarrelBlocked(0):
+        RugerNo1.clearBarrels()
     act = ""
     while act != "@":
         print("-" * 50)
@@ -27,6 +29,7 @@ def main():
         print("h = remove round")
         print("v = toggle safety")
         print("{,} = next/previous ammo type")
+        print("@ = exit program")
         RugerNo1.currentAmmo()
         print("-" * 50)
         print("hold trigger: " + str(RugerNo1.showTToggle()))
@@ -78,6 +81,8 @@ def main():
                 RugerNo1.nextRound()
             elif act[a] == "@":
                 print("Exiting Program...")
+            elif act[a] == " ":
+                print("You wait...")
             else:
                 print("NOT A VALID COMMAND")
             RugerNo1.incrementSec(1)

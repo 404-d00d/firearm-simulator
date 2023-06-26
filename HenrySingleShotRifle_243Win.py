@@ -8,6 +8,8 @@ ammo = [["Prvi Partizan|.243 Winchester|Soft Point", 20, "KATHRAAAOOOOOOOOOOM", 
 HenrySSRifle = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 2, 1, False, False, 0, 0)
 
 def main():
+    if HenrySSRifle.isBarrelBlocked(0):
+        HenrySSRifle.clearBarrels()
     act = ""
     while act != "@":
         print("-" * 50)
@@ -27,6 +29,7 @@ def main():
         print("y = insert round")
         print("h = remove round")
         print("{,} = next/previous ammo type")
+        print("@ = exit program")
         HenrySSRifle.currentAmmo()
         print("-"*50)
         print("hold hammer: "+str(HenrySSRifle.showHToggle()))
@@ -91,6 +94,8 @@ def main():
                 HenrySSRifle.nextRound()
             elif act[a] == "@":
                 print("Exiting Program...")
+            elif act[a] == " ":
+                print("You wait...")
             else:
                 print("NOT A VALID COMMAND")
             HenrySSRifle.incrementSec(1)

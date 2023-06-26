@@ -30,6 +30,14 @@ class Gun_BreakOpen:
         self.currentbarrel = 0
         self.secondsPassed = 0
 
+    def clearBarrels(self):
+        for x in range(len(self.barrel)):
+            self.barrel[x][1] = False
+            print("After handing the gun to a gunsmith to remove the squib load, the gun is now ready to fire.")
+
+    def isBarrelBlocked(self, x):
+        return self.barrel[x][1]
+
     def incrementSec(self, y):
         self.secondsPassed += y
         self.hangFire()
@@ -136,20 +144,27 @@ class Gun_BreakOpen:
                     self.ammo[b][1] += 1
                     if y == 1:
                         print("You remove a live cartridge from the chamber.")
-                    else:
+                    elif self.exject == 0:
                         print("A live cartridge flies out of the chamber.")
                 #selective ejection systems only kick out spent shells AFAIK - will amend once more info found
                 elif self.barrel[x][0] == "Spent "+self.ammo[b][0]:
                     if y == 1:
                         print("You remove a spent cartridge from the chamber.")
-                    else:
+                    elif self.exject <= 1:
                         print("A spent cartridge flies out of the chamber.")
                 elif self.barrel[x][0] == "Dud "+self.ammo[b][0]:
                     if y == 1:
                         print("You remove a dud cartridge from the chamber.")
-                    else:
+                    elif self.exject == 0:
                         print("A dud cartridge flies out of the chamber.")
-                else:
+                elif self.barrel[x][0] == "Struck "+self.ammo[b][0]:
+                    if y == 1:
+                        print("You remove a struck cartridge from the chamber.")
+                        print("Because it's still a live round you put it somewhere where it won't explode and injure you.")
+                    elif self.exject == 0:
+                        print("A struck cartridge flies out of the chamber.")
+                        print("Because it's still a live round you find it and put it somewhere where it won't explode and injure you.")
+                elif y != 0:
                     print("There is nothing to remove.")
             self.changeBarrel(x, "")
         else:
@@ -164,47 +179,53 @@ class Gun_BreakOpen:
         return self.hammer
 
     def fireBarrel(self, x):
-        if not self.showTToggle():
-            print("You pull the trigger.")
-        #hammer must be cocked in order to fire properly
-        if self.hammer[x] == 2:
-            if self.opentrigger == 0 and self.getBarrelLock() == 0:
-                #check if ammo in barrel does not match up with ammolist, if not produce clicking noise,
-                # hammer goes down,
-                count = 0
-                for a in range(len(self.ammo)):
-                    if self.barrel[x][0] == self.ammo[a][0]:
-                        malfunction = random.random()
-                        if malfunction < self.ammo[a][7]:
-                            malftype = random.randint(0, 2)
-                            # Dud rounds, powder in cartridge doesn't fire at all
-                            if malftype == 0:
-                                self.changeBarrel(x, "Dud " + self.ammo[a][0])
-                            # Hang fire, powder ignition is delayed, bullet will fire later
-                            elif malftype == 1:
-                                self.barrel[x][2] = random.uniform(0.1, 30)
-                                self.barrel[x][3] = self.secondsPassed
-                            # Squib load, charge is not enough to propel bullet, bullet is stuck in barrel
-                            else:
-                                print("POOOOFFFFFFFF")
-                                self.changeBarrel(x, "Spent " + self.ammo[a][0])
-                                self.blockBarrel(x, True)
-                                count += 1
-                        else:
-                            print(self.ammo[a][2])
-                            count += 1
-                            self.changeBarrel(x, "Spent "+self.ammo[a][0])
-                if count == 0:
-                    print("KLIK")
-                self.changeHammer(x, 0)
-            elif self.opentrigger == 1:
-                print("KLIK")
-                self.changeHammer(x, 0)
-            else:
-                if not self.showTToggle():
-                    print("PLAP")
+        if self.barrel[x][1] == True:
+            print("Bad idea, that barrel seems to be blocked. \n"
+                  "Don't fire unless you want to damage the gun or yourself.\n"
+                  "I suggest you go back to the main menu, so that the jam will be cleared.")
         else:
-            print("PLAP")
-            #pulling trigger, just slapping metal
-        if not self.showTToggle():
-            print("After you pulled the trigger, you let go of it.")
+            if not self.showTToggle():
+                print("You pull the trigger.")
+            #hammer must be cocked in order to fire properly
+            if self.hammer[x] == 2:
+                if self.opentrigger == 0 and self.getBarrelLock() == 0:
+                    #check if ammo in barrel does not match up with ammolist, if not produce clicking noise,
+                    # hammer goes down,
+                    count = 0
+                    for a in range(len(self.ammo)):
+                        if self.barrel[x][0] == self.ammo[a][0]:
+                            malfunction = random.random()
+                            if malfunction < self.ammo[a][7]:
+                                malftype = random.randint(0, 2)
+                                # Dud rounds, powder in cartridge doesn't fire at all
+                                if malftype == 0:
+                                    self.changeBarrel(x, "Dud " + self.ammo[a][0])
+                                # Hang fire, powder ignition is delayed, bullet will fire later
+                                elif malftype == 1:
+                                    self.changeBarrel(x, "Struck "+self.ammo[a][0])
+                                    self.barrel[x][2] = random.uniform(0.1, 30)
+                                    self.barrel[x][3] = self.secondsPassed
+                                # Squib load, charge is not enough to propel bullet, bullet is stuck in barrel
+                                else:
+                                    print("POOOOFFFFFFFF")
+                                    self.changeBarrel(x, "Spent " + self.ammo[a][0])
+                                    self.blockBarrel(x, True)
+                                    count += 1
+                            else:
+                                print(self.ammo[a][2])
+                                count += 1
+                                self.changeBarrel(x, "Spent "+self.ammo[a][0])
+                    if count == 0:
+                        print("KLIK")
+                    self.changeHammer(x, 0)
+                elif self.opentrigger == 1:
+                    print("KLIK")
+                    self.changeHammer(x, 0)
+                else:
+                    if not self.showTToggle():
+                        print("PLAP")
+            else:
+                print("PLAP")
+                #pulling trigger, just slapping metal
+            if not self.showTToggle():
+                print("After you pulled the trigger, you let go of it.")

@@ -8,6 +8,8 @@ ammo = [["CCI Mini Mag|.22 LR|Round Nose", 100, "KRAAAAAAAK", 40, 1235, 25.4, 1,
 SavageMK1 = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 0, False, False, 0, 1)
 
 def main():
+    if SavageMK1.isBarrelBlocked(0):
+        SavageMK1.clearBarrels()
     act = ""
     while act != "@":
         print("-" * 50)
@@ -26,6 +28,7 @@ def main():
         print("h = remove round")
         print("v = toggle safety")
         print("{,} = next/previous ammo type")
+        print("@ = exit program")
         SavageMK1.currentAmmo()
         print("-" * 50)
         print("hold trigger: " + str(SavageMK1.showTToggle()))
@@ -87,6 +90,8 @@ def main():
                     SavageMK1.fireBarrel(0)
             elif act[a] == "@":
                 print("Exiting Program...")
+            elif act[a] == " ":
+                print("You wait...")
             else:
                 print("NOT A VALID COMMAND")
             SavageMK1.incrementSec(1)

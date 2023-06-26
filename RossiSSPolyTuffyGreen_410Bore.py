@@ -8,6 +8,8 @@ ammo = [["Fiocchi Target|.410 Bore|#8 Birdshot", 25, "KATHRAAAAK", 1.07, 1250, 6
 RossiSSPTGreen = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
 
 def main():
+    if RossiSSPTGreen.isBarrelBlocked(0):
+        RossiSSPTGreen.clearBarrels()
     act = ""
     while act != "@":
         print("-" * 50)
@@ -29,6 +31,7 @@ def main():
         print("h = remove round")
         print("v = toggle safety")
         print("{,} = next/previous ammo type")
+        print("@ = exit program")
         RossiSSPTGreen.currentAmmo()
         print("-"*50)
         print("hold hammer: "+str(RossiSSPTGreen.showHToggle()))
@@ -131,6 +134,8 @@ def main():
                 RossiSSPTGreen.nextRound()
             elif act[a] == "@":
                 print("Exiting Program...")
+            elif act[a] == " ":
+                print("You wait...")
             else:
                 print("NOT A VALID COMMAND")
             RossiSSPTGreen.incrementSec(1)
