@@ -1,12 +1,12 @@
 # Henry HO15B-12 Single Shot Shotgun 12 Gauge
 
 from Gun_BreakOpen import Gun_BreakOpen
+from Ammunition import gauge12_2and3quarters
 
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count, malfunction chance
-ammo = [["Winchester Super-X|12 Gauge|00 Buckshot", 5, "KATHOOOOOOOM", 53.8, 1325, 69.85, 9, 0.001],
-        ["Federal Top Gun|12 Gauge|#8 Birdshot", 25, "KATHOOOOOOOM", 1.07, 1330, 69.85, 410, 0.001]]
+ammo = gauge12_2and3quarters
 
-HenrySSShotgun = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
+HenrySSShotgun = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 1, False, False, 1, 0)
 
 def main():
     if HenrySSShotgun.isBarrelBlocked(0):

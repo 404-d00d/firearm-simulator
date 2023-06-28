@@ -13,7 +13,7 @@ class Gun_BreakOpen:
     #independent hammer: 0=cock hammer when open/close, 1=hammer independent from barrel locking
     #holdhammer and holdtrigger used for manually lowering hammer, fan fire, slam fire, fullauto functions
     #opentrigger: determines whether user can pull trigger if action is open or not, 0 = yes, 1 = no
-    #cockon: determines at what stage on opening the action the gun will be cocked: 0 = cocking independed, 1-3 = stages of action
+    #cockon: determines at what stage on opening the action the gun will be cocked: 0 = cocking independent, 1-3 = stages of action
     def __init__(self, barrel, hammer, firemode, barrellock, ammo, exject, indepham, holdhammer, holdtrigger, opentrigger, cockon):
         self.barrel = barrel
         self.hammer = hammer
@@ -29,6 +29,12 @@ class Gun_BreakOpen:
         self.cockon = cockon
         self.currentbarrel = 0
         self.secondsPassed = 0
+
+    def changeCurrentBarrel(self, x):
+        self.currentbarrel = x
+
+    def getCurrentBarrel(self):
+        return self.currentbarrel
 
     def clearBarrels(self):
         for x in range(len(self.barrel)):
@@ -188,7 +194,8 @@ class Gun_BreakOpen:
                 print("You pull the trigger.")
             #hammer must be cocked in order to fire properly
             if self.hammer[x] == 2:
-                if self.opentrigger == 0 and self.getBarrelLock() == 0:
+                # action must also be closed in order for gun to fire
+                if self.getBarrelLock() == 0:
                     #check if ammo in barrel does not match up with ammolist, if not produce clicking noise,
                     # hammer goes down,
                     count = 0
@@ -218,7 +225,8 @@ class Gun_BreakOpen:
                     if count == 0:
                         print("KLIK")
                     self.changeHammer(x, 0)
-                elif self.opentrigger == 1:
+                # if action is open, check if trigger can be pulled while the action is opened,
+                elif self.opentrigger == 0:
                     print("KLIK")
                     self.changeHammer(x, 0)
                 else:

@@ -5,7 +5,7 @@ from Gun_BreakOpen import Gun_BreakOpen
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count, malfunction chance
 ammo = [["CCI Mini Mag|.22 LR|Round Nose", 100, "KRAAAAAAAK", 40, 1235, 25.4, 1, 0.01]]
 
-SavageMK1 = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 0, False, False, 0, 1)
+SavageMK1 = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 0, False, False, 1, 1)
 
 def main():
     if SavageMK1.isBarrelBlocked(0):
@@ -13,10 +13,12 @@ def main():
     act = ""
     while act != "@":
         print("-" * 50)
-        print("The Savage Mark 1 rifle is a bolt action rifle chambered in .22 Long Rifle\n"
-              "It is single shot only, and contains peep sights, which makes it usefull\n"
-              "for target shooting, plinking, hunting, and other activities where precision\n"
-              "is usefull. It is very popular in Boy Scout shooting ranges for this reason.")
+        print("The Savage Mark 1 rifle is a bolt action rifle chambered in .22 Long Rifle. It is single shot only, \n"
+              "and contains peep sights, which makes it useful for target shooting, plinking, hunting, and other \n"
+              "activities where precision is usefull. It is very popular in Boy Scout shooting ranges for this \n"
+              "reason. To operate it, rotate the bolt handle up and pull back to load a round into the chamber.\n"
+              "To close the bolt perform the reverse motions and when you are ready to fire, pull the trigger.\n"
+              "A safety will prevent you from pulling the trigger if activated, but you are still able to move the bolt.")
         print("-" * 50)
         print("Savage Mark 1 FVT Rifle | .22 Long Rifle")
         print("| = hold trigger/release trigger")

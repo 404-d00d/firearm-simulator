@@ -18,7 +18,7 @@ def main():
               "with plastic green furniture and is chambered in 3 inch shells. Operation is very simple: \n"
               "Push the the button on the top right of the frame to open up the gun, then shove a shell into the \n"
               "barrel. Cock the hammer and when you're ready to fire, pull the trigger. There is a safety that \n"
-              "prevents the hammer from striking the firing pi, although opening the action, pulling the trigger \n"
+              "prevents the hammer from striking the firing pin, although opening the action, pulling the trigger \n"
               "and cocking the hammer is unimpeded. Half cocking the hammer is possible with this gun.")
         print("-" * 50)
         print("Rossi SS Poly Tuffy Green Shotgun | .410 Bore 3 inch")
