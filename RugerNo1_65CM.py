@@ -25,8 +25,7 @@ def main():
         print("/ = yank trigger")
         print("t/T = open lever, partial/fully")
         print("b = close lever")
-        print("y = insert round")
-        print("h = remove round")
+        print("y/Y = insert round, remove round")
         print("v = toggle safety")
         print("{,} = next/previous ammo type")
         print("@ = exit program")
@@ -73,7 +72,7 @@ def main():
                     RugerNo1.fireBarrel(0)
             elif act[a] == "y":
                 RugerNo1.addRound(0)
-            elif act[a] == "h":
+            elif act[a] == "Y":
                 RugerNo1.removeRound(0, 1)
             elif act[a] == "{":
                 RugerNo1.prevRound()

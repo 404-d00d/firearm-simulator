@@ -26,8 +26,7 @@ def main():
         print("g/G = pull hammer/release hammer, yank back hammer")
         print("t/T = open barrel, partial/fully")
         print("b = close barrel")
-        print("y = insert round")
-        print("h = remove round")
+        print("y/Y = insert round, remove round")
         print("{,} = next/previous ammo type")
         print("@ = exit program")
         HenrySSRifle.currentAmmo()
@@ -83,7 +82,7 @@ def main():
                     print("The action is already closed.")
             elif act[a] == "y":
                 HenrySSRifle.addRound(0)
-            elif act[a] == "h":
+            elif act[a] == "Y":
                 HenrySSRifle.removeRound(0, 1)
             elif act[a] == "/":
                 if not HenrySSRifle.showHToggle() and not HenrySSRifle.showTToggle():

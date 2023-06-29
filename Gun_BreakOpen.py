@@ -8,7 +8,7 @@ import random
 class Gun_BreakOpen:
     #barrel, hammer, compatible ammo are arrays, firemode and barrellock are integers
     #barrel is 2d array, first item is barrel contents, second item is whether barrel is blocked or not, 3rd item
-    # is how long until ammo will fire if cartridge is a hang fire malfunction, 4th item is time hang fire started
+    # is how long until ammo will fire if cartridge is a hang fire malfunction, 4th item is time hang fire started,
     #exject variable: 0=eject always, 1=eject empties/extract live, 2=extract always
     #independent hammer: 0=cock hammer when open/close, 1=hammer independent from barrel locking
     #holdhammer and holdtrigger used for manually lowering hammer, fan fire, slam fire, fullauto functions

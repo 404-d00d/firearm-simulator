@@ -26,17 +26,16 @@ def main():
               "mounting sights and flashlights/lasers respectively. To operate the shotgun, push the lever to the\n"
               "left or right to open up the barrel, and insert live cartridges after removing any cartridges inside\n"
               "the barrel. The gun will not eject spent or live cartridges. Pulling the trigger fires the right\n"
-              "first then left, and finally the top barrel. The safety will prevent the hammer from striking the\n"
-              "firing pin. Inserting and removing rounds will follow the barrel firing order. The gun is chambered\n"
-              "for 12 Gauge 3 inch shells. 3.5 inch Magnum shells will NOT fit into the chambers.")
+              "barrel first then left, and finally the top barrel. The safety will prevent the hammer from striking\n"
+              "the firing pin. Inserting and removing rounds will follow the barrel firing order. The gun is\n"
+              "chambered for 12 Gauge 3 inch shells. 3.5 inch Magnum shells will NOT fit into the chambers.")
         print("-" * 50)
         print("Charles Daly Triple Threat Shotgun | 12 Gauge")
         print("| = hold trigger/release trigger")
         print("/ = yank trigger")
-        print("t/T = open lever, partial/fully")
-        print("b = close lever")
-        print("y = insert round")
-        print("h = remove round")
+        print("t/T = open barrels, partial/fully")
+        print("b = close barrels")
+        print("y/Y = insert round, remove round")
         print("v = toggle safety")
         print("{,} = next/previous ammo type")
         print("[,] = change barrel to load/unload")
@@ -72,7 +71,7 @@ def main():
                     print("You push the sliding button on the tang so that the red dot is covered and the letter S is revealed.")
                 else:
                     CharlesDalyTT.changeFiremode(0)
-                    print("You push the sliding button on the tang so that the letter S is covered and a red dot is shown")
+                    print("You push the sliding button on the tang so that the letter S is covered and a red dot is shown.")
             elif act[a] == "|":
                 CharlesDalyTT.toggleTrigger()
                 if CharlesDalyTT.showTToggle():
@@ -84,11 +83,11 @@ def main():
             elif act[a] == "t":
                 if CharlesDalyTT.getBarrelLock() == 0:
                     CharlesDalyTT.changeBarrelLock(2)
-                    print("You depress the inside button on the lever, and partially push it down, opening the action.")
+                    print("You push the top lever to the right, and break open the barrels slightly.")
                     print("The gun is partially open.")
             elif act[a] == "T":
                 if CharlesDalyTT.getBarrelLock() < 3:
-                    print("You depress the inside button on the lever, and push it down fully, opening the action.")
+                    print("You push the top lever to the right, and break open the barrels fully.")
                     print("The gun is fully open.")
                     CharlesDalyTT.changeBarrelLock(3)
                     CharlesDalyTT.changeCurrentBarrel(2)
@@ -97,7 +96,7 @@ def main():
             elif act[a] == "b":
                 if CharlesDalyTT.getBarrelLock() != 0:
                     CharlesDalyTT.changeBarrelLock(0)
-                    print("You close up the lever, and thus close the action of the gun.")
+                    print("You close up the barrels, and thus close the action of the gun.")
                     CharlesDalyTT.changeCurrentBarrel(2)
                 else:
                     print("The action is already closed.")
@@ -112,10 +111,8 @@ def main():
                         print("After you pulled the trigger, you let go of it.")
             elif act[a] == "y":
                 CharlesDalyTT.addRound(CharlesDalyTT.getCurrentBarrel())
-                #switchBarrel()
-            elif act[a] == "h":
+            elif act[a] == "Y":
                 CharlesDalyTT.removeRound(CharlesDalyTT.getCurrentBarrel(), 1)
-                #switchBarrel()
             elif act[a] == "{":
                 CharlesDalyTT.prevRound()
             elif act[a] == "}":

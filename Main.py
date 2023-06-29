@@ -4,10 +4,12 @@ import HenrySingleShotRifle_243Win
 import RugerNo1_65CM
 import RossiSSPolyTuffyGreen_410Bore
 import CharlesDalyTripleThreat_12Gauge
+import StoegerDoubleDefense_12Gauge
 
 guns = ["Henry Single Shot Shotgun Brass Frame = 12 Gauge", "Henry Single Shot Rifle = .243 Win",
         "Ruger No 1 Rifle = 6.5 CM", "Savage Mark 1 FVT Rifle = .22 LR",
-        "Rossi SS Poly Tuffy Green Shotgun = .410 Bore", "Charles Daly Triple Threat Shotgun = 12 Gauge"]
+        "Rossi SS Poly Tuffy Green Shotgun = .410 Bore", "Charles Daly Triple Threat Shotgun = 12 Gauge",
+        "Stoeger Double Defense SxS Shotgun = 12 Gauge"]
 
 print("_____________________")
 print("|   GUN SIMULATOR   |")
@@ -33,6 +35,8 @@ while act != "exit":
         RossiSSPolyTuffyGreen_410Bore.main()
     elif act == "6":
         CharlesDalyTripleThreat_12Gauge.main()
+    elif act == "7":
+        StoegerDoubleDefense_12Gauge.main()
     elif act == "safe":
         print("============ THE FOUR MAIN RULES OF GUN SAFETY ============")
         print("= Even if this is a simulation, ALWAYS FOLLOW THESE RULES =")

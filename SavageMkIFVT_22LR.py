@@ -26,8 +26,7 @@ def main():
         print("g = rotate open bolt/close bolt")
         print("t/T = open bolt, partial/fully")
         print("b = push back bolt")
-        print("y = insert round")
-        print("h = remove round")
+        print("y/Y = insert round, remove round")
         print("v = toggle safety")
         print("{,} = next/previous ammo type")
         print("@ = exit program")
@@ -81,7 +80,7 @@ def main():
                     print("Bad idea.")
             elif act[a] == "y":
                 SavageMK1.addRound(0)
-            elif act[a] == "h":
+            elif act[a] == "Y":
                 SavageMK1.removeRound(0, 1)
             elif act[a] == "/":
                 if SavageMK1.getFiremode() == 0 and not SavageMK1.showTToggle():

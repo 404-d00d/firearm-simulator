@@ -27,8 +27,7 @@ def main():
         print("g/G = pull hammer/release hammer, yank back hammer")
         print("t/T = open barrel, partial/fully")
         print("b/B = close barrel, half cock hammer")
-        print("y = insert round")
-        print("h = remove round")
+        print("y/Y = insert round, remove round")
         print("v = toggle safety")
         print("{,} = next/previous ammo type")
         print("@ = exit program")
@@ -114,7 +113,7 @@ def main():
                     print("The action is already closed.")
             elif act[a] == "y":
                 RossiSSPTGreen.addRound(0)
-            elif act[a] == "h":
+            elif act[a] == "Y":
                 RossiSSPTGreen.removeRound(0, 1)
             elif act[a] == "/":
                 if not RossiSSPTGreen.showHToggle() and not RossiSSPTGreen.showTToggle():
