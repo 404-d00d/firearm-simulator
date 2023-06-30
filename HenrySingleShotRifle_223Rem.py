@@ -22,7 +22,7 @@ def main():
               "Cock the hammer and when you're ready to fire, pull the trigger.\n"
               "A specialized hammer system prevents the barrel from opening or closing if the hammer is cocked.")
         print("-" * 50)
-        print("Henry HO15 Single Shot Rifle | .243 Winchester")
+        print("Henry HO15 Single Shot Rifle | .223 Remington")
         print("| = hold trigger/release trigger")
         print("/ = yank trigger")
         print("g/G = pull hammer/release hammer, yank back hammer")
