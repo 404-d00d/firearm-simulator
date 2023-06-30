@@ -7,6 +7,7 @@ ammo = [["CCI Mini Mag|.22 LR|Round Nose", 100, "KRAAAAAAAK", 40, 1235, 25.4, 1,
 
 SavageMK1 = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 0, False, False, 1, 1)
 
+
 def main():
     if SavageMK1.isBarrelBlocked(0):
         SavageMK1.clearBarrels()

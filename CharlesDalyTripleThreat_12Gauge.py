@@ -13,6 +13,7 @@ def switchBarrel():
     elif CharlesDalyTT.getCurrentBarrel() == 0:
         CharlesDalyTT.changeCurrentBarrel(1)
 
+
 def main():
     CharlesDalyTT.changeCurrentBarrel(2)
     if CharlesDalyTT.isBarrelBlocked(0) or CharlesDalyTT.isBarrelBlocked(1) or CharlesDalyTT.isBarrelBlocked(2):

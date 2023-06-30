@@ -7,6 +7,7 @@ ammo = [["Fiocchi Target|.410 Bore|#8 Birdshot", 25, "KATHRAAAAK", 1.07, 1250, 6
 
 RossiSSPTGreen = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
 
+
 def main():
     if RossiSSPTGreen.isBarrelBlocked(0):
         RossiSSPTGreen.clearBarrels()
