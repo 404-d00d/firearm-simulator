@@ -91,7 +91,6 @@ def main():
                     print("You push the top lever to the right, and break open the barrels fully.")
                     print("The gun is fully open.")
                     CharlesDalyTT.changeBarrelLock(3)
-                    CharlesDalyTT.changeCurrentBarrel(2)
                 else:
                     print("The gun is already fully open.")
             elif act[a] == "b":

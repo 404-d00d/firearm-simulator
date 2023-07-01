@@ -5,11 +5,12 @@ import RugerNo1_223Rem
 import RossiSSPolyTuffyGreen_410Bore
 import CharlesDalyTripleThreat_12Gauge
 import StoegerDoubleDefenseSXS_12Gauge
+import BrowningCynergyCXComposite_12Gauge
 
 guns = ["Henry Single Shot Shotgun Brass Frame = 12 Gauge", "Henry Single Shot Rifle = .223 Rem",
         "Ruger No 1 Rifle = .223 Rem", "Savage Mark 1 FVT Rifle = .22 LR",
         "Rossi SS Poly Tuffy Green Shotgun = .410 Bore", "Charles Daly Triple Threat Shotgun = 12 Gauge",
-        "Stoeger Double Defense SxS Shotgun = 12 Gauge"]
+        "Stoeger Double Defense SxS Shotgun = 12 Gauge", "Browning Cynergy CX Composite Shotgun = 12 Gauge"]
 
 print("_____________________")
 print("|   GUN SIMULATOR   |")
@@ -22,6 +23,7 @@ while act != "exit":
         print(str(x+1)+" - "+guns[x])
     print("To leave the program - type in 'exit'")
     print("To get the 4 main rules of gun safety - type in 'safe'")
+    #print("To get information on ammunition jams and how to deal with them - type in 'ammojam'")
     act = input("INPUT: ")
     if act == "1":
         HenrySigleShotShotgun_12Gauge.main()
@@ -37,6 +39,8 @@ while act != "exit":
         CharlesDalyTripleThreat_12Gauge.main()
     elif act == "7":
         StoegerDoubleDefenseSXS_12Gauge.main()
+    elif act == "8":
+        BrowningCynergyCXComposite_12Gauge.main()
     elif act == "safe":
         print("============ THE FOUR MAIN RULES OF GUN SAFETY ============")
         print("= Even if this is a simulation, ALWAYS FOLLOW THESE RULES =")

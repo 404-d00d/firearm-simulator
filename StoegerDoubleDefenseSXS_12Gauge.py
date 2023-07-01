@@ -4,7 +4,7 @@ from Ammunition import gauge12_2and3quarters
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count, malfunction chance
 ammo = gauge12_2and3quarters
 
-StoegerDD = Gun_BreakOpen([["", False, 0, 0], ["", False, 0, 0]], [0, 0, 0], 0, 0, ammo, 2, 0, False, False, 1, 3)
+StoegerDD = Gun_BreakOpen([["", False, 0, 0], ["", False, 0, 0]], [0, 0], 0, 0, ammo, 2, 0, False, False, 1, 3)
 
 
 def switchBarrel():
@@ -12,7 +12,6 @@ def switchBarrel():
         StoegerDD.changeCurrentBarrel(0)
 
 def main():
-    StoegerDD.changeCurrentBarrel(2)
     if StoegerDD.isBarrelBlocked(0) or StoegerDD.isBarrelBlocked(1):
         StoegerDD.clearBarrels()
     act = ""
@@ -87,7 +86,6 @@ def main():
                     print("You push the top lever to the right, and break open the barrels fully.")
                     print("The gun is fully open.")
                     StoegerDD.changeBarrelLock(3)
-                    StoegerDD.changeCurrentBarrel(1)
                     if StoegerDD.getFiremode() == 0:
                         print("The automatic safety is engaged, and the S underneath the safety is revealed.")
                     StoegerDD.changeFiremode(1)

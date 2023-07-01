@@ -105,7 +105,8 @@ class Gun_BreakOpen:
                 self.changeHammer(c, 2)
         if self.barrellock == 3: #if ejection is true for all or spent cartridges, play remove round
             if self.exject <= 1:
-                self.removeRound(0, 0)
+                for d in range(len(self.hammer)):
+                    self.removeRound(d, 0)
 
     def blockBarrel(self, x, trueOrNot):
         self.barrel[x][1] = trueOrNot
@@ -147,32 +148,40 @@ class Gun_BreakOpen:
         if self.barrellock == 3:
             for b in range(len(self.ammo)):
                 if self.barrel[x][0] == self.ammo[b][0]:
-                    self.ammo[b][1] += 1
                     if y == 1:
                         print("You remove a live cartridge from the chamber.")
+                        self.changeBarrel(x, "")
+                        self.ammo[b][1] += 1
                     elif self.exject == 0:
                         print("A live cartridge flies out of the chamber.")
-                #selective ejection systems only kick out spent shells AFAIK - will amend once more info found
+                        self.changeBarrel(x, "")
+                        self.ammo[b][1] += 1
+                #selective/auto ejection systems only kick out spent shells AFAIK - will amend once more info found
                 elif self.barrel[x][0] == "Spent "+self.ammo[b][0]:
                     if y == 1:
                         print("You remove a spent cartridge from the chamber.")
+                        self.changeBarrel(x, "")
                     elif self.exject <= 1:
                         print("A spent cartridge flies out of the chamber.")
+                        self.changeBarrel(x, "")
                 elif self.barrel[x][0] == "Dud "+self.ammo[b][0]:
                     if y == 1:
                         print("You remove a dud cartridge from the chamber.")
+                        self.changeBarrel(x, "")
                     elif self.exject == 0:
                         print("A dud cartridge flies out of the chamber.")
+                        self.changeBarrel(x, "")
                 elif self.barrel[x][0] == "Struck "+self.ammo[b][0]:
                     if y == 1:
                         print("You remove a struck cartridge from the chamber.")
                         print("Because it's still a live round you put it somewhere where it won't explode and injure you.")
+                        self.changeBarrel(x, "")
                     elif self.exject == 0:
                         print("A struck cartridge flies out of the chamber.")
                         print("Because it's still a live round you find it and put it somewhere where it won't explode and injure you.")
+                        self.changeBarrel(x, "")
                 elif y != 0:
                     print("There is nothing to remove.")
-            self.changeBarrel(x, "")
         else:
             print("You can't remove a cartridge from a closed chamber.")
 
