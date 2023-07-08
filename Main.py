@@ -6,11 +6,13 @@ import RossiSSPolyTuffyGreen_410Bore
 import CharlesDalyTripleThreat_12Gauge
 import StoegerDoubleDefenseSXS_12Gauge
 import BrowningCynergyCXComposite_12Gauge
+import COP357Derringer_357Magnum
 
-guns = ["Henry Single Shot Shotgun Brass Frame = 12 Gauge", "Henry Single Shot Rifle = .223 Rem",
-        "Ruger No 1 Rifle = .223 Rem", "Savage Mark 1 FVT Rifle = .22 LR",
-        "Rossi SS Poly Tuffy Green Shotgun = .410 Bore", "Charles Daly Triple Threat Shotgun = 12 Gauge",
-        "Stoeger Double Defense SxS Shotgun = 12 Gauge", "Browning Cynergy CX Composite Shotgun = 12 Gauge"]
+guns = ["Henry Single Shot Shotgun Brass Frame = 12 Gauge 3 1/2 Inch", "Henry Single Shot Rifle = .223 Rem/5.56 NATO",
+        "Ruger No 1 Rifle = .223 Rem/5.56 NATO", "Savage Mark 1 FVT Rifle = .22 LR",
+        "Rossi SS Poly Tuffy Green Shotgun = .410 Bore 3 Inch", "Charles Daly Triple Threat Shotgun = 12 Gauge 3 Inch",
+        "Stoeger Double Defense SxS Shotgun = 12 Gauge 3 Inch",
+        "Browning Cynergy CX Composite Shotgun = 12 Gauge 3 Inch", "COP 357 Derringer = .357 Magnum/.38 Special"]
 
 print("_____________________")
 print("|   GUN SIMULATOR   |")
@@ -41,6 +43,8 @@ while act != "exit":
         StoegerDoubleDefenseSXS_12Gauge.main()
     elif act == "8":
         BrowningCynergyCXComposite_12Gauge.main()
+    elif act == "9":
+        COP357Derringer_357Magnum.main()
     elif act == "safe":
         print("============ THE FOUR MAIN RULES OF GUN SAFETY ============")
         print("= Even if this is a simulation, ALWAYS FOLLOW THESE RULES =")

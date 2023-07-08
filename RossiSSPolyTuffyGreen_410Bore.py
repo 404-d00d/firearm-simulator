@@ -1,9 +1,10 @@
 # Rossi SS Poly Tuffy Green Shotgun .410 Bore
 
 from Gun_BreakOpen import Gun_BreakOpen
+from Ammunition import bore410_2and1half
 
 #brandname and bullet and type, amount, sound, grain, velocity (fps), overall length (in mm), projectile count, malfunction chance
-ammo = [["Fiocchi Target|.410 Bore|#8 Birdshot", 25, "KATHRAAAAK", 1.07, 1250, 63.5, 204, 0.001]]
+ammo = bore410_2and1half
 
 RossiSSPTGreen = Gun_BreakOpen([["", False, 0, 0]], [0], 0, 0, ammo, 0, 1, False, False, 0, 0)
 

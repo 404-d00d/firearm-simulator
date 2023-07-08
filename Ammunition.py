@@ -8,3 +8,11 @@ gauge12_2and3quarters = [["Winchester Super-X|12 Gauge|00 Buckshot", 5, "KATHOOO
 
 remington223 = [["Precision Made Cartridges|.223 Remington|FMJ-BT", 20, "KTHRAAAAAAAK", 55, 2900, 57, 1, 0.001],
                 ["Black Hills Ammunition|.223 Remington|HP", 20, "KTHRAAAAAAAAK", 75, 2750, 57, 1, 0.001]]
+
+bore410_2and1half = [["Fiocchi Target|.410 Bore|#8 Birdshot", 25, "KATHRAAAAK", 1.07, 1250, 63.5, 204, 0.001]]
+
+lr22 = [["CCI Mini Mag|.22 LR|Round Nose", 100, "KRAAAAAAAK", 40, 1235, 25.4, 1, 0.01]]
+
+magnum357 = [["Black Hills|.357 Magnum|Lead Round Nose", 50, "KTHOOOOOM", 158, 800, 40, 1, 0.001]]
+
+special38 = [["Remington Performance|.38 Special|Lead Semi Wadcutter", 50, "KTHOOOOOM", 158, 755, 39.4, 1, 0.001]]
