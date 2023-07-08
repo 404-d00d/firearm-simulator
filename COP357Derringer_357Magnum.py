@@ -71,10 +71,10 @@ def main():
             elif act[a] == "|":
                 COP357.toggleTrigger()
                 if COP357.showTToggle():
-                    moveRight()
-                    presentBarrel = COP357.getCurrentBarrel()
                     COP357.changeHammer(presentBarrel, 2)
                     COP357.fireBarrel(presentBarrel)
+                    moveRight()
+                    presentBarrel = COP357.getCurrentBarrel()
             elif act[a] == "t":
                 if COP357.getBarrelLock() == 0:
                     COP357.changeBarrelLock(2)
@@ -95,10 +95,10 @@ def main():
                     print("The action is already closed.")
             elif act[a] == "/":
                 if not COP357.showTToggle():
-                    moveRight()
-                    presentBarrel = COP357.getCurrentBarrel()
                     COP357.changeHammer(presentBarrel, 2)
                     COP357.fireBarrel(presentBarrel)
+                    moveRight()
+                    presentBarrel = COP357.getCurrentBarrel()
             elif act[a] == "y":
                 COP357.addRound(COP357.getCurrentBarrel())
             elif act[a] == "Y":
