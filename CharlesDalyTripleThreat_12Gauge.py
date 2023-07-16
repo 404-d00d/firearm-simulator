@@ -28,7 +28,7 @@ def main():
               "left or right to open up the barrel, and insert live cartridges after removing any cartridges inside\n"
               "the barrel. The gun will not eject spent or live cartridges. Pulling the trigger fires the right\n"
               "barrel first then left, and finally the top barrel. The safety will prevent the hammer from striking\n"
-              "the firing pin. Inserting and removing rounds will follow the barrel firing order. The gun is\n"
+              "the firing pin. Opening the action resets the firing order of the barrels. The gun is\n"
               "chambered for 12 Gauge 3 inch shells. 3.5 inch Magnum shells will NOT fit into the chambers.")
         print("-" * 50)
         print("Charles Daly Triple Threat Shotgun | 12 Gauge")
