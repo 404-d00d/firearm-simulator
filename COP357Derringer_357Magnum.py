@@ -25,6 +25,8 @@ def moveRight():
 
 
 def main():
+    # present barrel starts at 3 because setting it to 0 means you have to cycle twice before it works properly
+    # reason for this is unclear
     presentBarrel = 3
     if COP357.isBarrelBlocked(0) or COP357.isBarrelBlocked(1) or COP357.isBarrelBlocked(2) or COP357.isBarrelBlocked(3):
         COP357.clearBarrels()

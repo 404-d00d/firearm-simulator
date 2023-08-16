@@ -13,6 +13,7 @@ nato556 = [["Wolf Gold|5.56 NATO|FMJ", 20, "KTHRAAAAAAAAAK", 55, 3250, 57.4, 1, 
 
 bore410_2and1half = [["Fiocchi Target|.410 Bore|#8 Birdshot", 25, "KATHRAAAAK", 1.07, 1250, 63.5, 204, 0.001]]
 
+# 22lr firearms can also fire 22short, 22long, 22bb, and 22cb
 lr22 = [["CCI Mini Mag|.22 LR|Round Nose", 100, "KRAAAAAAAK", 40, 1235, 25.4, 1, 0.01]]
 
 magnum357 = [["Black Hills|.357 Magnum|Lead Round Nose", 50, "KTHOOOOOM", 158, 800, 40, 1, 0.001]]
