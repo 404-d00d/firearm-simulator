@@ -1,6 +1,6 @@
-# simulates single barrel or multiple barrel firearms
-# classes that inherit it will implement conditions based on how firearm actually operates
-# programs inheriting class just add flavor text to the operation of the firearm
+# simulates single barrel or multiple barrel firearms with one firing trigger
+# classes that inherit it will add other methods that this class may not fully provide
+# programs using class just add flavor text and uses fuctions based on how it actually operates
 
 import random
 
