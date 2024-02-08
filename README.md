@@ -1,4 +1,4 @@
-# gun-simulator
+# firearm-simulator
 A Python project that simulates firearms. Currently it simulates operations, ammo types, and common ammo malfunctions (dud rounds, hangfires, squib loads). Jamming, malfunctions, and other systems will be added later.
 
 # HOW TO USE
